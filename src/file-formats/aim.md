@@ -19,20 +19,21 @@ These data sections may hold raw pixel data, uncompressed or compressed image fo
 
 ## AIM.dll
 Patrician 3 uses only the first version of the AIM format via `AIM.dll`, which provides an interface for creating and manipulating AIM files.
+All AIM files of Patrician 3 are compressed. The compression algorithm needs to be reverse-engineered.
 
 ### Data structures
 The enumeration `AIM_EXPORT_FORMAT` defines the supported output formats for the `AIM_SAVE_BITMAP` function:
 ```C
 typedef enum {
-	BMP_8       = 1,       //  8-bit BMP 
-	BMP_24      = 2,       // 24-bit BMP 
+	BMP_8       = 1,       //  8-bit BMP
+	BMP_24      = 2,       // 24-bit BMP
 	TGA_MAP_8   = 3,       //  8-bit TGA
-	TGA_RGBA_16 = 4,       // 16-bit TGA 
+	TGA_RGBA_16 = 4,       // 16-bit TGA
 	TGA_RGB_24  = 5,       // 24-bit TGA
 	TGA_RGBA_32 = 6,       // 32-bit TGA
 	JPG_LOW     = 100,     // low quality JPG
 	JPG_MID     = 150,
-	JPG_HIGH    = 200	   // high quality JPG
+	JPG_HIGH    = 200      // high quality JPG
 } AIM_EXPORT_FORMAT;
 ```
 
@@ -76,7 +77,7 @@ typedef struct {
 } AIM_IMAGE;
 ```
 
-#### Exported functions
+### Exported functions
 The following function signatures have been verified through testing:
 ```C
 // initializes an AIM_IMAGE instance
@@ -91,3 +92,8 @@ int AIM_SAVE_BITMAP(AIM_IMAGE* image, AIM_EXPORT_FORMAT format, const char* outp
 // frees the AIM_IMAGE instance
 void AIM_FREE(AIM_IMAGE* image);
 ```
+
+### Implementations
+There is currently no independent implementation that does not rely on `AIM.dll` and fully supports reading and writing of `.aim` files.
+
+[aimcli](https://github.com/P3Modding/p3-lib/tree/master/aimcli) supports `.aim` to `.bmp` conversion with `PALETTE`, `NOALPHA` and `SIMPLE` pixel encodings.
