@@ -21,6 +21,21 @@ These data sections may hold raw pixel data, uncompressed or compressed image fo
 Patrician 3 uses only the first version of the AIM format via `AIM.dll`, which provides an interface for creating and manipulating AIM files.
 
 ### Data structures
+The enumeration `AIM_EXPORT_FORMAT` defines the supported output formats for the `AIM_SAVE_BITMAP` function:
+```C
+typedef enum {
+	BMP_8       = 1,       //  8-bit BMP 
+	BMP_24      = 2,       // 24-bit BMP 
+	TGA_MAP_8   = 3,       //  8-bit TGA
+	TGA_RGBA_16 = 4,       // 16-bit TGA 
+	TGA_RGB_24  = 5,       // 24-bit TGA
+	TGA_RGBA_32 = 6,       // 32-bit TGA
+	JPG_LOW     = 100,     // low quality JPG
+	JPG_MID     = 150,
+	JPG_HIGH    = 200	   // high quality JPG
+} AIM_EXPORT_FORMAT;
+```
+
 The enumeration `AIM_PIXEL_ENCODING` defines the supported pixel encodings of a AIM file:
 ```C
 typedef enum {
@@ -69,6 +84,9 @@ void AIM_INIT(AIM_IMAGE* image);
 
 // loads the specified '.aim' image and decompresses it
 int AIM_CONVERT_FILE(AIM_IMAGE* image, const char* input_file);
+
+// exports the loaded '.aim' image into the specified file format
+int AIM_SAVE_BITMAP(AIM_IMAGE* image, AIM_EXPORT_FORMAT format, const char* output_file);
 
 // frees the AIM_IMAGE instance
 void AIM_FREE(AIM_IMAGE* image);
