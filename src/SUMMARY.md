@@ -78,6 +78,7 @@
     - [Shipyard Details](./patches/shipyard-details.md)
     - [Town Hall Details](./patches/town-hall-details.md)
 - [File Formats](./file-formats.md)
+	- [AIM](./file-formats/aim.md)
     - [CPR](./file-formats/cpr.md)
     - [Trade Routes (.rou)](./file-formats/rou.md)
     - [Navigation Matrix](./file-formats/navigation-matrix.md)
